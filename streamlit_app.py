@@ -33,7 +33,11 @@ obs["ts"] = pd.to_datetime(obs["ts"], format="ISO8601")
 sites = sorted(obs.site.unique())
 site = st.sidebar.selectbox("Site", sites, index=sites.index("mock_store") if "mock_store" in sites else 0)
 o = obs[obs.site == site]
-latest = o.sort_values("ts").groupby("sku").tail(1)
+o = o.sort_values("ts")
+latest = o.groupby("sku").tail(1).drop(columns=["price", "currency"])
+# a breakage run stores no price; show the last known price instead of blanks
+last_price = o.dropna(subset=["price"]).groupby("sku").tail(1)[["sku", "price", "currency"]]
+latest = latest.merge(last_price, on="sku", how="left")
 events = q("SELECT ts, kind, name, old, new, pct FROM events WHERE site=? ORDER BY ts DESC", (site,))
 runs = q("SELECT ts, items, pages, breakages, errors FROM runs WHERE site=? ORDER BY ts DESC", (site,))
 
