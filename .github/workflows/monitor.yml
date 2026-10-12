@@ -16,7 +16,7 @@ jobs:
           path: pricemon.db
           key: pricemon-db-${{ github.run_id }}
           restore-keys: pricemon-db-
-      - name: Scrape sandbox sites (polite: robots.txt, UA, 1 req/s, cached)
+      - name: "Scrape sandbox sites (polite - robots.txt, UA, 1 req/s, cached)"
         env:
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}   # unset -> mock alerts
           ALERT_WEBHOOK_KIND: slack
