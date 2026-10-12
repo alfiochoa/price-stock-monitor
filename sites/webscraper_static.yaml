@@ -1,0 +1,13 @@
+# Sandbox: https://webscraper.io/test-sites/e-commerce/static (no stock info -> availability stays 'unknown')
+name: webscraper_static
+base_url: https://webscraper.io
+start_urls: [/test-sites/e-commerce/static/computers/laptops]
+item: div.card.thumbnail
+next_page: a.page-link.next
+max_pages: 2
+rate_limit: 1.0
+fields:
+  sku: {selector: a.title, attr: href, regex: "/product/(\\d+)"}
+  name: {selector: a.title, attr: title}
+  url: {selector: a.title, attr: href}
+  price: span[itemprop=price]

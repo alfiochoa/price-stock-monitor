@@ -1,0 +1,14 @@
+# Sandbox, JS-rendered (items injected client-side) -> Playwright. https://webscraper.io/test-sites/e-commerce/ajax
+name: webscraper_js
+render: js
+wait_for: div.card.thumbnail
+base_url: https://webscraper.io
+start_urls: [/test-sites/e-commerce/ajax/computers/tablets]
+item: div.card.thumbnail
+max_pages: 1
+rate_limit: 1.0
+fields:
+  sku: {selector: a.title, attr: href, regex: "/product/(\\d+)"}
+  name: {selector: a.title, attr: title}
+  url: {selector: a.title, attr: href}
+  price: h4.price

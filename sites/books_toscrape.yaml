@@ -1,0 +1,14 @@
+# Sandbox built for scraping practice: https://books.toscrape.com
+name: books_toscrape
+base_url: https://books.toscrape.com/catalogue/
+start_urls: [page-1.html]
+item: article.product_pod
+next_page: li.next a
+max_pages: 3
+rate_limit: 1.0
+fields:
+  sku: {selector: h3 a, attr: href, regex: "([^/]+)/index.html"}
+  name: {selector: h3 a, attr: title}
+  url: {selector: h3 a, attr: href}
+  price: p.price_color
+  availability: p.availability

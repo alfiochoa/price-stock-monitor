@@ -1,0 +1,14 @@
+# Local mock competitor store (pricemon mock-serve). Prices change per simulated day.
+name: mock_store
+base_url: http://127.0.0.1:8765
+start_urls: [/catalog/page-1.html]
+item: div.product
+next_page: a.next
+max_pages: 5
+rate_limit: 0.05
+fields:
+  sku: {selector: ".", attr: data-sku}
+  name: h2.name a
+  url: {selector: h2.name a, attr: href}
+  price: span.price
+  availability: span.stock
