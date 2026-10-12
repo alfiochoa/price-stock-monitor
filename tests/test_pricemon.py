@@ -220,7 +220,7 @@ def test_export_csv_and_xlsx(tmp_path):
     s = Store(":memory:")
     s.record("t", [item(10.0)], ts="2026-01-01")
     s.record("t", [item(12.0)], ts="2026-01-02")
-    assert "12.0" in Path(export(s, str(tmp_path / "o.csv"))).read_text()
+    assert "12.0" in Path(export(s, str(tmp_path / "new" / "o.csv"))).read_text()
     import openpyxl
     wb = openpyxl.load_workbook(export(s, str(tmp_path / "o.xlsx")))
     assert wb.sheetnames == ["latest", "history", "events"] and wb["history"].max_row == 3

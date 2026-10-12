@@ -1,6 +1,8 @@
 """CSV / XLSX export of the latest snapshot and the full history."""
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 
 from .store import Store
@@ -19,6 +21,7 @@ def frames(store: Store) -> dict[str, pd.DataFrame]:
 
 
 def export(store: Store, path: str) -> str:
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     fr = frames(store)
     if path.endswith(".xlsx"):
         with pd.ExcelWriter(path) as xw:
