@@ -224,3 +224,21 @@ def test_export_csv_and_xlsx(tmp_path):
     import openpyxl
     wb = openpyxl.load_workbook(export(s, str(tmp_path / "o.xlsx")))
     assert wb.sheetnames == ["latest", "history", "events"] and wb["history"].max_row == 3
+
+
+def test_seed_demo_and_streamlit_app(tmp_path):
+    from streamlit.testing.v1 import AppTest
+
+    from pricemon.seed import seed_demo
+    db = seed_demo(str(tmp_path / "d.db"))
+    s = Store(db)
+    assert s.db.execute("SELECT COUNT(*) FROM observations").fetchone()[0] == 72
+    assert s.db.execute("SELECT COUNT(*) FROM events").fetchone()[0] == 10
+    assert s.db.execute("SELECT SUM(breakages) FROM runs").fetchone()[0] == 2
+    import os
+    os.environ["PRICEMON_DB"] = db
+    try:
+        at = AppTest.from_file("../streamlit_app.py", default_timeout=60).run()
+    finally:
+        del os.environ["PRICEMON_DB"]
+    assert not at.exception and at.metric[0].value == "12"

@@ -6,6 +6,10 @@
 
 > Built and demoed **only against scraping sandboxes** (`books.toscrape.com`, `webscraper.io/test-sites`) and a **local mock store** whose prices change over simulated days. See [Ethics](#ethics--legal).
 
+## Live demo (Streamlit Community Cloud)
+`streamlit_app.py` at the repo root self-seeds synthetic data on first run (6 simulated days from the bundled mock store, fully offline: no scraping, no secrets).
+Locally: `pip install -r requirements.txt && streamlit run streamlit_app.py`. Cloud settings: repo `alfiochoa/price-stock-monitor`, branch `main`, main file `streamlit_app.py`.
+
 ## How it works
 
 ```mermaid
@@ -26,9 +30,9 @@ flowchart LR
 ## Quick start
 
 ```bash
-pip install -r requirements.txt && playwright install chromium   # chromium only needed for the JS-rendered site
+pip install -r requirements-dev.txt && playwright install chromium   # playwright/chromium only needed for the JS-rendered site
 python scripts/demo.py            # 6 simulated days on the local mock store -> demo.db (add --live for the sandbox sites)
-PRICEMON_DB=demo.db streamlit run dashboard.py
+PRICEMON_DB=demo.db streamlit run streamlit_app.py
 python -m pricemon run --only books_toscrape,webscraper_static,webscraper_js   # real (sandbox) run -> pricemon.db
 python -m pricemon export exports/report.xlsx    # or .csv
 pytest -q
@@ -98,4 +102,4 @@ This repo is a **portfolio demo**. It only targets sites that exist to be scrape
 
 ## Layout
 
-`pricemon/` (config, fetch, scrape, normalize, store, alerts, export, mockstore, cli) · `sites/` YAML configs · `dashboard.py` · `scripts/demo.py` · `tests/` (+ `fixtures/` saved HTML) · `.github/workflows/` (CI + schedule)
+`pricemon/` (config, fetch, scrape, normalize, store, alerts, export, mockstore, cli) · `sites/` YAML configs · `streamlit_app.py` · `scripts/demo.py` · `tests/` (+ `fixtures/` saved HTML) · `.github/workflows/` (CI + schedule)

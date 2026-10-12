@@ -1,2 +1,4 @@
+-r requirements.txt
 pytest
 ruff
+playwright>=1.44   # only for the JS-rendered site config
