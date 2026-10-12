@@ -1,0 +1,26 @@
+name: scheduled-monitor
+on:
+  schedule: [{cron: "0 6 * * *"}]   # daily 06:00 UTC
+  workflow_dispatch:
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt && playwright install --with-deps chromium
+      # history DB persists between scheduled runs via the Actions cache
+      - uses: actions/cache@v4
+        with:
+          path: pricemon.db
+          key: pricemon-db-${{ github.run_id }}
+          restore-keys: pricemon-db-
+      - name: Scrape sandbox sites (polite: robots.txt, UA, 1 req/s, cached)
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}   # unset -> mock alerts
+          ALERT_WEBHOOK_KIND: slack
+        run: python -m pricemon run --only books_toscrape,webscraper_static,webscraper_js
+      - run: python -m pricemon export exports/latest.xlsx
+      - uses: actions/upload-artifact@v4
+        with: {name: price-report, path: exports/latest.xlsx}
