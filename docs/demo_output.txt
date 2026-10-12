@@ -1,0 +1,40 @@
+
+=== simulated day 0 (2026-10-07) ===
+{'mock_store': {'items': 12, 'pages': 3, 'events': 0, 'breakages': 0, 'errors': 0}}
+
+=== simulated day 1 (2026-10-08) ===
+[mock-alert] *Price/stock changes*
+📉 [mock_store] Trail Runner Shoes: 89.90 EUR → 80.91 EUR (-10.0%)
+⛔ [mock_store] Ultralight Tent 2P: out of stock
+{'mock_store': {'items': 12, 'pages': 3, 'events': 2, 'breakages': 0, 'errors': 0}}
+
+=== simulated day 2 (2026-10-09) ===
+[mock-alert] *Price/stock changes*
+✅ [mock_store] Ultralight Tent 2P: back in stock
+📈 [mock_store] Waterproof Shell Jacket: 139.00 EUR → 150.12 EUR (+8.0%)
+{'mock_store': {'items': 12, 'pages': 3, 'events': 2, 'breakages': 0, 'errors': 0}}
+
+=== simulated day 3 (2026-10-10) ===
+[mock-alert] *Price/stock changes*
+📉 [mock_store] Down Sleeping Bag: 179.00 EUR → 152.15 EUR (-15.0%)
+⛔ [mock_store] Headlamp 400lm: out of stock
+{'mock_store': {'items': 12, 'pages': 3, 'events': 2, 'breakages': 0, 'errors': 0}}
+
+=== simulated day 4 (2026-10-11) ===
+[mock-alert] *Price/stock changes*
+✅ [mock_store] Headlamp 400lm: back in stock
+📉 [mock_store] Compact Stove: 41.00 EUR → 38.95 EUR (-5.0%)
+[mock-alert] 🚨 *Scraper breakage detected* — selectors need attention
+• mock_store: field 'price' (selector 'span.price') empty for 5/5 items on http://127.0.0.1:8765/catalog/page-1.html
+{'mock_store': {'items': 12, 'pages': 3, 'events': 2, 'breakages': 1, 'errors': 0}}
+
+=== simulated day 5 (2026-10-12) ===
+[mock-alert] *Price/stock changes*
+📈 [mock_store] Insulated Bottle 1L: 27.90 EUR → 31.25 EUR (+12.0%)
+⛔ [mock_store] Insulated Bottle 1L: out of stock
+[mock-alert] 🚨 *Scraper breakage detected* — selectors need attention
+• mock_store: field 'price' (selector 'span.price') empty for 5/5 items on http://127.0.0.1:8765/catalog/page-1.html
+{'mock_store': {'items': 12, 'pages': 3, 'events': 2, 'breakages': 1, 'errors': 0}}
+
+=== live sandbox sites ===
+{'books_toscrape': {'items': 60, 'pages': 3, 'events': 0, 'breakages': 0, 'errors': 0}, 'webscraper_static': {'items': 12, 'pages': 2, 'events': 0, 'breakages': 0, 'errors': 0}, 'webscraper_js': {'items': 6, 'pages': 1, 'events': 0, 'breakages': 0, 'errors': 0}}
