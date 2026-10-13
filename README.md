@@ -1,5 +1,7 @@
 # Price & Stock Monitor
 
+[![Live demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://alfredo-price-stock-monitor.streamlit.app/)
+
 **A small online store wants to know when competitors change prices or run out of stock.** This pipeline scrapes competitor catalogues on a schedule, keeps a price/availability history in SQLite, detects changes (price drop/rise %, back in stock / out of stock), pings a Slack/Discord webhook, exports CSV/XLSX, and shows it all in a Streamlit dashboard. **New sites are added with a YAML file — no code.**
 
 ![dashboard](docs/dashboard.png)
@@ -7,6 +9,10 @@
 > Built and demoed **only against scraping sandboxes** (`books.toscrape.com`, `webscraper.io/test-sites`) and a **local mock store** whose prices change over simulated days. See [Ethics](#ethics--legal).
 
 ## Live demo (Streamlit Community Cloud)
+**Live demo: https://alfredo-price-stock-monitor.streamlit.app/** (synthetic data, self-seeding; first load after idle may take a few seconds to wake)
+
+![live demo](docs/live-demo.png)
+
 `streamlit_app.py` at the repo root self-seeds synthetic data on first run (6 simulated days from the bundled mock store, fully offline: no scraping, no secrets).
 Locally: `pip install -r requirements.txt && streamlit run streamlit_app.py`. Cloud settings: repo `alfiochoa/price-stock-monitor`, branch `main`, main file `streamlit_app.py`.
 
