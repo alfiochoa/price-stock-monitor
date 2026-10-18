@@ -9,7 +9,7 @@
 > Built and demoed **only against scraping sandboxes** (`books.toscrape.com`, `webscraper.io/test-sites`) and a **local mock store** whose prices change over simulated days. See [Ethics](#ethics--legal).
 
 ## Live demo (Streamlit Community Cloud)
-**Live demo: https://alfredo-price-stock-monitor.streamlit.app/** (synthetic data, self-seeding; first load after idle may take a few seconds to wake)
+**Live demo: https://alfredo-price-stock-monitor.streamlit.app/** (synthetic data, self-seeding; first load after idle can take about 30 s to wake)
 
 ![live demo](docs/live-demo.png)
 
